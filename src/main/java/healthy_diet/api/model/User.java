@@ -38,9 +38,25 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+//    @Override
+//    public String toString() {
+//        return "User{";
+//    }
+
     @Override
     public String toString() {
-        return "User{";
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", nameSurname='" + nameSurname + '\'' +
+                ", birthday=" + birthday +
+                ", isAccountNonExpired=" + isAccountNonExpired +
+                ", isAccountNonLocked=" + isAccountNonLocked +
+                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
+                ", isEnabled=" + isEnabled +
+                ", role=" + role +
+                '}';
     }
 
     private String password;

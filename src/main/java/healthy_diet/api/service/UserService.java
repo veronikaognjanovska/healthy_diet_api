@@ -33,12 +33,17 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new NotFound(username));
     }
 
+    public User loadUserByUsername1(String username) throws NotFound {
+        return this.userRepository.findByUsername1(username)
+                .orElseThrow(() -> new NotFound(username));
+    }
+
     @Transactional
     public Optional<User> save(UserDto dto) {
         if (dto.getUsername() == null || dto.getPassword() == null || dto.getNameSurname() == null ||
                 dto.getEmail() == null || dto.getBirthday() == null)
             throw new NotFound("");
-        if (this.userRepository.findByUsername(dto.getUsername()).isPresent()) {
+        if (this.userRepository.findByUsername1(dto.getUsername()).isPresent()) {
             throw new NotFound(dto.getUsername());
         }
         User user = new User(dto.getUsername(), passwordEncoder.encode(dto.getPassword()),

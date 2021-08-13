@@ -15,7 +15,8 @@ import java.util.Set;
 @Data
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler",
         "healthyDietUsername",
-        "savedBy"})
+        "savedBy"
+})
 public class Recipe {
 
     @OneToMany(mappedBy = "recipeId",fetch = FetchType.LAZY)
@@ -96,4 +97,20 @@ public class Recipe {
         this.ingredients = listToString(list);
     }
 
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", timeToPrepare=" + timeToPrepare +
+                ", people=" + people +
+                ", rate=" + rate +
+                ", types='" + types + '\'' +
+                ", calories=" + calories +
+                ", by='" + by + '\'' +
+                ", dateTime=" + dateTime +
+                ", preparation='" + preparation + '\'' +
+                ", ingredients='" + ingredients + '\'' +
+                '}';
+    }
 }

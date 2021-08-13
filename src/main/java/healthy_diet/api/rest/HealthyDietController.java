@@ -1,8 +1,11 @@
 package healthy_diet.api.rest;
 
+import healthy_diet.api.model.HealthyDiet;
 import healthy_diet.api.service.HealthyDietService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -12,6 +15,16 @@ public class HealthyDietController {
 
     public HealthyDietController(HealthyDietService healthyDietService) {
         this.healthyDietService = healthyDietService;
+    }
+
+    @GetMapping("/{username}")
+    private List<HealthyDiet> get(@PathVariable String username) {
+        return this.healthyDietService.getHealthy(username);
+    }
+
+    @GetMapping("/{username}/{date}")
+    private List<HealthyDiet> getDate(@PathVariable String username, @PathVariable String date) {
+        return this.healthyDietService.getHealthyDate(username, date);
     }
 
     @GetMapping("/add/{username}/{id}")

@@ -12,6 +12,12 @@ public class DateConfig {
         return ZonedDateTime.now(ZoneId.of("UTC"));
     }
 
+    public static String getDateNowString() {
+        ZonedDateTime date = ZonedDateTime.now();
+        return formatter.format(date);
+    }
+
+
     public static String getDateString(ZonedDateTime z) {
         return z.format(formatter);
     }

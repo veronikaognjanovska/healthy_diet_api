@@ -78,18 +78,18 @@ public class RecipeService {
 
     @Transactional
     public void save(Long recipe_id, String username) throws NotFound {
-        Recipe recipe = this.getRecipe(recipe_id);
-        User user = this.userService.loadUserByUsername(username);
-        recipe.getSavedBy().add(user);
-        this.recipeRepository.save(recipe);
+//        Recipe recipe = this.getRecipe(recipe_id);
+//        User user = this.userService.loadUserByUsername(username);
+//        recipe.getSavedBy().add(user);
+//        this.recipeRepository.save(recipe);
     }
 
     @Transactional
     public void unsave(Long recipe_id, String username) throws NotFound {
-        Recipe recipe = this.getRecipe(recipe_id);
-        User user = this.userService.loadUserByUsername(username);
-        recipe.getSavedBy().remove(user);
-        this.recipeRepository.save(recipe);
+//        Recipe recipe = this.getRecipe(recipe_id);
+//        User user = this.userService.loadUserByUsername(username);
+//        recipe.getSavedBy().remove(user);
+//        this.recipeRepository.save(recipe);
     }
 
     @Transactional

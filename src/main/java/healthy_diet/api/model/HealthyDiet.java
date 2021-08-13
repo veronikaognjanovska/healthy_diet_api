@@ -5,11 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.ZonedDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class HealthyDiet {
 
     @Id
@@ -28,9 +28,9 @@ public class HealthyDiet {
     @JoinColumn(name = "recipe_id")
     Recipe recipeId;
 
-    ZonedDateTime date;
+    String date;
 
-    public HealthyDiet(User username, Recipe recipeId, ZonedDateTime date) {
+    public HealthyDiet(User username, Recipe recipeId, String date) {
         this.username = username;
         this.recipeId = recipeId;
         this.date = date;
