@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -19,8 +18,10 @@ import java.util.Set;
 })
 public class Recipe {
 
-    @OneToMany(mappedBy = "recipeId",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "recipeId", fetch = FetchType.LAZY)
     Set<HealthyDiet> healthyDietUsername;
+    @ManyToMany(mappedBy = "saved")
+    Set<User> savedBy;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,20 +40,17 @@ public class Recipe {
     @Column(name = "by")
     private String by;
     @Column(name = "datetime")
-    private ZonedDateTime dateTime;
+    private String dateTime;
     @Column(name = "preparation")
     private String preparation;
     @Column(name = "ingredients")
     private String ingredients;
 
-    @ManyToMany(mappedBy = "saved")
-    Set<User> savedBy;
-
     public Recipe() {
     }
 
     public Recipe(String title, Integer timeToPrepare, Integer people, Double rate, List<String> types,
-                  Double calories, String by, ZonedDateTime dateTime, String preparation, List<String> ingredients) {
+                  Double calories, String by, String dateTime, String preparation, List<String> ingredients) {
         this.id = id;
         this.title = title;
         this.timeToPrepare = timeToPrepare;
@@ -85,12 +83,12 @@ public class Recipe {
         return stringToList(this.types);
     }
 
-    public List<String> getIngredients1() {
-        return stringToList(this.ingredients);
-    }
-
     public void setTypes1(List<String> list) {
         this.types = listToString(list);
+    }
+
+    public List<String> getIngredients1() {
+        return stringToList(this.ingredients);
     }
 
     public void setIngredients1(List<String> list) {

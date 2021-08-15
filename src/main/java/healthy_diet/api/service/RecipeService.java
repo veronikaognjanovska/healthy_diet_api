@@ -26,7 +26,9 @@ public class RecipeService {
     }
 
     public Recipe getRecipe(Long id) {
-        return this.recipeRepository.findById(id).orElseThrow(() -> new NotFound(String.format("Recipe with id: %d not found!", id)));
+        Recipe r =  this.recipeRepository.findById(id).orElseThrow(() -> new NotFound(String.format("Recipe with id: %d not found!", id)));
+        System.out.println(r);
+        return r;
     }
 
     public Boolean existsRecipe(Long id) {
@@ -57,7 +59,7 @@ public class RecipeService {
             throws IllegalArgumentException, NotFound {
         this.checkParameter(recipeDto);
         Recipe recipe = new Recipe(recipeDto.getTitle(), recipeDto.getTimeToPrepare(), recipeDto.getPeople(),
-                0.0, recipeDto.getTypes(), recipeDto.getCalories(), recipeDto.getBy(), DateConfig.getDateNow(),
+                0.0, recipeDto.getTypes(), recipeDto.getCalories(), recipeDto.getBy(), DateConfig.getDateNowString(),
                 recipeDto.getPreparation(), recipeDto.getIngredients());
         return Optional.of(this.recipeRepository.save(recipe));
     }
